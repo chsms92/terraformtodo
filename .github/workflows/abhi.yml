@@ -1,0 +1,8 @@
+name: "my first workflow"
+on: 
+  push:
+    branches:
+      - 'feature/**'
+      - 'main'
+  workflow_dispatch:
+  
