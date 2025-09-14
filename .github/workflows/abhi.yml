@@ -10,4 +10,5 @@ jobs:
     runs-on: abhi-maharaj
     steps:
     - name: abhi-maharaj
+      run: echo mera bhai 
   
