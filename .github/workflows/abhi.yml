@@ -1,8 +1,17 @@
 name: "my first workflow"
 on: 
-  push:
+  push
     branches:
-      - 'feature/**'
-      - 'main'
+      - main
+      - 'mona/octocat'
+      - 'releases/**'
+    # Sequence of patterns matched against refs/tags
+    tags:
+      - v2
+      - v1.*
+  jobs:
+    terraformInit:
+      name: intiwa
+      runs-on: abhi-maharaj
 
   
