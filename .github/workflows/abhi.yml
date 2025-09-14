@@ -5,15 +5,9 @@ on:
       - main
       - 'feature/**'
 jobs:
-  build:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
-
+  AbhiMaharaj:
+    name: AbhiMaharaj
+    runs-on: abhi-maharaj
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Run cross-platform echo
-        run: echo "abhi-maharaj"
-        shell: bash
+    - name: abhi-maharaj
+  
