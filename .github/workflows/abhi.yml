@@ -1,6 +1,6 @@
 name: "my first workflow"
 on: 
-  push
+  push:
     branches:
       - main
       - 'mona/octocat'
