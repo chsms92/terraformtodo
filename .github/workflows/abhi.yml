@@ -4,5 +4,5 @@ on:
     branches:
       - 'feature/**'
       - 'main'
-  workflow_dispatch:
+
   
