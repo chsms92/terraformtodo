@@ -13,5 +13,6 @@ on:
     terraformInit:
       name: intiwa
       runs-on: abhi-maharaj
-
-  
+      steps:
+      - name: abhi-maharaj
+        run: echo "abhi-maharaj"
