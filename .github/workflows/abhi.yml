@@ -11,4 +11,8 @@ jobs:
     steps:
     - name: abhi-maharaj
       run: echo mera bhai 
+    - name: chabhi-maharaj
+      run: echo mera chabhi bhai
+    - name: Allow PowerShell scripts
+      run: powershell.exe -ExecutionPolicy Bypass -File yourscript.ps1
   
