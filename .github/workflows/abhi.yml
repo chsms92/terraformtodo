@@ -13,6 +13,9 @@ jobs:
       run: echo mera bhai 
     - name: chabhi-maharaj
       run: echo mera chabhi bhai
-    - name: Allow PowerShell scripts
-      run: powershell.exe -ExecutionPolicy Bypass -File yourscript.ps1
-  
+    - name: Allow PowerShell scripts (inline)
+      shell: powershell
+      run: |
+        Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
+        Write-Output "Execution policy bypassed for this job"
+        Write-Output "Now you can run PowerShell commands safely"
