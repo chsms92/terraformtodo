@@ -1,0 +1,77 @@
+name: "Dev Terraform Workflow"
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main      
+
+permissions:
+  id-token: write
+  contents: read
+  
+jobs: 
+  terraform-init-plan:
+    runs-on: abhi-maharaj
+    steps: 
+      - name: Checkout
+        uses: actions/checkout@v5.0.0
+    
+      - name: Azure Login
+        uses: Azure/login@v2.3.0
+        with:
+          client-id: 96524e1a-8144-4145-b492-962a1c4a55b2
+          tenant-id: 622196ce-d3ea-4efe-b997-c359b8b193f9
+          subscription-id: 13dfd1e6-6770-4299-b7ea-6aa09b346468
+            
+      - name: Terraform fmt
+        id: fmt
+        run: terraform fmt -check
+        continue-on-error: true
+        working-directory: environments/dev
+        
+      - name: Terraform Init
+        id: init
+        run: terraform init -input=false  
+        working-directory: environments/dev
+
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate -no-color
+        working-directory: environments/dev        
+      
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan -no-color -input=false
+        continue-on-error: true
+        working-directory: environments/dev    
+        
+  terraform-apply:    
+    runs-on: abhi-maharaj
+    if: github.ref == 'refs/heads/main'
+    needs: terraform-init-plan
+    environment: dev
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5.0.0
+    
+      - name: Azure Login
+        uses: Azure/login@v2.3.0
+        with:
+          client-id: 96524e1a-8144-4145-b492-962a1c4a55b2
+          tenant-id: 622196ce-d3ea-4efe-b997-c359b8b193f9
+          subscription-id: 13dfd1e6-6770-4299-b7ea-6aa09b346468 
+          
+      - name: Terraform Init
+        id: init
+        run: terraform init -input=false  
+        working-directory: environments/dev
+
+      - name: Terraform Apply
+        id: apply
+        run: terraform apply --auto-approve
+        continue-on-error: true
+        working-directory: environments/dev              
+          
